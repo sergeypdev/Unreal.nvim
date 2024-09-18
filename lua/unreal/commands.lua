@@ -511,7 +511,7 @@ function Stage_UbtGenCmd()
                     end
                     coroutine.yield()
 
-                    table.insert(contentLines, "\t\t\"command\": \"clang++.exe @\\\"" ..newrsppath .."\\\"\",\n")
+                    table.insert(contentLines, "\t\t\"command\": \"clang++ @\\\"" ..newrsppath .."\\\"\",\n")
                 end
             else
                 -- it's not an rsp command, the flags will be clang compatible
@@ -549,7 +549,7 @@ function Stage_UbtGenCmd()
                 end
                 coroutine.yield()
 
-                table.insert(contentLines, "\t\t\"command\": \"clang++.exe @\\\"" .. EscapePath(rspfilepath) .."\\\""
+                table.insert(contentLines, "\t\t\"command\": \"clang++ @\\\"" .. EscapePath(rspfilepath) .."\\\""
                     .. " ".. EscapePath(currentFilename) .."\",\n")
             end
         else
@@ -673,8 +673,8 @@ function InitializeCurrentGenData()
         return false
     end
 
-    CurrentGenData.ubtPath = "\"" .. CurrentGenData.config.EngineDir .."/Engine/Binaries/DotNET/UnrealBuildTool/UnrealBuildTool.exe\""
-    CurrentGenData.ueBuildBat = "\"" .. CurrentGenData.config.EngineDir .."/Engine/Build/BatchFiles/Build.bat\""
+    CurrentGenData.ubtPath = "\"" .. CurrentGenData.config.EngineDir .."/Engine/Binaries/DotNET/UnrealBuildTool/UnrealBuildTool\""
+    CurrentGenData.ueBuildBat = "\"" .. CurrentGenData.config.EngineDir .."/Engine/Build/BatchFiles/RunUBT.sh\""
     CurrentGenData.projectPath = "\"" .. CurrentGenData.prjDir .. "/" .. 
         CurrentGenData.prjName .. ".uproject\""
 
@@ -771,7 +771,7 @@ function Commands.run(opts)
         end
 
         local executablePath = "\"".. CurrentGenData.config.EngineDir .. "/Engine/Binaries/" ..
-        CurrentGenData.target.PlatformName .. "/UnrealEditor" ..  editorSuffix .. ".exe\""
+        CurrentGenData.target.PlatformName .. "/UnrealEditor" ..  editorSuffix .. "\""
 
         cmd = executablePath .. " " ..
         CurrentGenData.projectPath .. " -skipcompile"
@@ -783,7 +783,7 @@ function Commands.run(opts)
         end
 
         local executablePath = "\"".. CurrentGenData.prjDir .. "/Binaries/" ..
-        CurrentGenData.target.PlatformName .. "/" .. CurrentGenData.prjName ..  exeSuffix .. ".exe\""
+        CurrentGenData.target.PlatformName .. "/" .. CurrentGenData.prjName ..  exeSuffix .. "\""
 
         cmd = executablePath
     end
